@@ -1,9 +1,9 @@
-import { inject, injectable } from 'tsyringe'
-import { IUsersRepository } from '../../entities/repositories/IUsersRepository'
-import { sign } from 'jsonwebtoken'
-
 import { compare } from 'bcryptjs'
-import { AppError } from '../../../../errors/AppError'
+import { sign } from 'jsonwebtoken'
+import { inject, injectable } from 'tsyringe'
+import { AppError } from '@shared/errors/AppError'
+import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository'
+
 
 interface IRequest {
   email: string
@@ -32,10 +32,10 @@ class AuthenticateUserUseCase {
     if (!user) {
       throw new AppError('Email or password incorrect')
     }
-    const passwordMAtch = await compare(password, user.password)
+    const passwordMatch = await compare(password, user.password)
 
     //Senha correta ?
-    if (!passwordMAtch) {
+    if (!passwordMatch) {
       throw new AppError('Email ou password incorrect')
     }
     //Gerar jsonwebtoken

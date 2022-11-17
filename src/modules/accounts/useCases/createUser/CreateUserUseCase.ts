@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 import { hash } from 'bcryptjs'
-import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
-import { IUsersRepository } from '../../entities/repositories/IUsersRepository';
-import { AppError } from '../../../../errors/AppError';
+import { ICreateUserDTO } from '@modules/accounts/dtos/ICreateUserDTO';
+import { AppError } from '@shared/errors/AppError';
+import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
 
 @injectable()
 class CreateUserUseCase {
@@ -24,7 +24,7 @@ class CreateUserUseCase {
     await this.usersRepository.create({
       name,
       email,
-      password: passwordHash //- falha quando operado junto com o DOCKER(talvez seja a versao)
+      password: passwordHash
       ,
       driver_license
     })

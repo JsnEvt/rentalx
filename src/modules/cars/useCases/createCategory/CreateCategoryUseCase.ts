@@ -3,8 +3,8 @@
 //ELES NEM PRECISAM SE CONHECEREM.
 
 import { inject, injectable } from "tsyringe"
-import { AppError } from '../../../../errors/AppError'
-import { ICategoriesRepository } from '../../repositories/ICategoriesRepository'
+import { AppError } from '@shared/errors/AppError'
+import { ICategoriesRepository } from '@modules/cars/infra/typeorm/repositories/ICategoriesRepository'
 
 
 
