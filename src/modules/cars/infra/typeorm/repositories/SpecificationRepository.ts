@@ -26,6 +26,10 @@ class SpecificationsRepository implements ISpecificationsRepository {
     return specification
   }
 
+  async findByIds(ids: string[]): Promise<Specification[]> {
+    return
+  }
+
 
 }
 
