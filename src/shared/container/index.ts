@@ -9,6 +9,8 @@ import { ISpecificationsRepository } from '@modules/cars/infra/typeorm/repositor
 import { SpecificationsRepository } from '@modules/cars/infra/typeorm/repositories/SpecificationRepository'
 import { ICarRepository } from '@modules/cars/repositories/ICarRepository'
 import { CarsRepository } from '@modules/cars/infra/typeorm/repositories/CarsRepository'
+import { ICarsImagesRepository } from '@modules/cars/infra/typeorm/repositories/ICarImagesRepository'
+import { CarsImagesRepository } from '@modules/cars/infra/typeorm/repositories/CarsImagesRepository'
 
 
 //passando a interface ICategoryRepository para dentro do singleton
@@ -19,7 +21,7 @@ container.registerSingleton<ICategoriesRepository>(
 
 //InterfaceSpecificatiions
 container.registerSingleton<ISpecificationsRepository>(
-  "SpecifcationsRepository",
+  "SpecificationsRepository",
   SpecificationsRepository
 )
 
@@ -31,4 +33,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<ICarRepository>(
   'CarsRepository',
   CarsRepository
+)
+
+container.registerSingleton<ICarsImagesRepository>(
+  'CarsImagesRepository',
+  CarsImagesRepository
 )

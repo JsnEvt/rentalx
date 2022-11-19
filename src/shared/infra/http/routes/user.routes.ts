@@ -7,13 +7,13 @@ import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 
 const usersRoutes = Router()
 
-const uplodaAvatar = multer(uploadConfig.upload('./tmp/avatar'))
+const uploadAvatar = multer(uploadConfig.upload('./tmp/avatar'))
 
 const createUserController = new CreateUserController()
 const updateUserAvatarController = new UpdateUserAvatarController()
 
 usersRoutes.post('/', createUserController.handle)
 
-usersRoutes.patch('/avatar', ensureAuthenticated, uplodaAvatar.single('avatar'), updateUserAvatarController.handle)
+usersRoutes.patch('/avatar', ensureAuthenticated, uploadAvatar.single('avatar'), updateUserAvatarController.handle)
 
 export { usersRoutes }

@@ -42,7 +42,6 @@ Não deve ser possível qualquer pessoa cadastrar um carro, apenas um usuário a
 
 **RF**
 Deve ser possível cadastrar a imagem do carro
-O administrador poderá visualizar todos os carros independentemente do estado (locado ou não locado.)
 
 **RNF**
 Utitlizar o multer para upload dos arquivos

@@ -1,3 +1,4 @@
+import { Car } from '@modules/cars/infra/typeorm/entities/Car'
 import { ISpecificationsRepository } from '@modules/cars/infra/typeorm/repositories/ISpecificationRepository'
 import { ICarRepository } from '@modules/cars/repositories/ICarRepository'
 import { AppError } from '@shared/errors/AppError'
@@ -8,17 +9,18 @@ interface IRequest {
   specifications_id: string[],
 }
 
-// @injectable()
+@injectable()
 class CreateCarSpecificationUseCase {
 
   constructor(
-    // @inject('CarRepository')
+    @inject('CarsRepository')
     private carsRepository: ICarRepository,
+    @inject('SpecificationsRepository')
     private specificationsRepository: ISpecificationsRepository
 
     // DOIS PRIVATES VISTO QUE SAO DUAS TABELAS DE RELACAO MUITOS PARA MUITOS
   ) { }
-  async execute({ car_id, specifications_id }: IRequest): Promise<void> {
+  async execute({ car_id, specifications_id }: IRequest): Promise<Car> {
     const carExists = await this.carsRepository.findById(car_id)
     if (!carExists) {
       throw new AppError('Car does not exists!')
@@ -26,7 +28,7 @@ class CreateCarSpecificationUseCase {
     const specifications = await this.specificationsRepository.findByIds(specifications_id)
     carExists.specifications = specifications
     await this.carsRepository.create(carExists)
-    console.log(carExists)
+    return carExists
   }
 }
 

@@ -9,7 +9,7 @@ interface IRequest {
 @injectable()
 class CreateSpecificationUseCase {
   constructor(
-    @inject("SpecifcationsRepository")
+    @inject("SpecificationsRepository")
     private specificationRepository: ISpecificationsRepository) { }
 
   async execute({ name, description }: IRequest): Promise<void> {
