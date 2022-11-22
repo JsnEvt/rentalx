@@ -24,6 +24,8 @@ describe('List cars', () => {
       }
     )
     const cars = await listAvailableCarsUseCase.execute({})
+    //  console.log(cars) // nao esta gerando um id?!?!? .... pq?!?
+    // console.log(cars.length) OK
     expect(cars).toEqual([car])
   })
 
@@ -43,6 +45,7 @@ describe('List cars', () => {
     const cars = await listAvailableCarsUseCase.execute({
       brand: 'Car_brand_test'
     })
+    console.log(cars)
     expect(cars).toEqual([car])
   })
 
@@ -62,7 +65,6 @@ describe('List cars', () => {
     const cars = await listAvailableCarsUseCase.execute({
       name: 'Car5'
     })
-    console.log(car)
     expect(cars).toEqual([car])
   })
 
@@ -83,7 +85,6 @@ describe('List cars', () => {
     const cars = await listAvailableCarsUseCase.execute({
       category_id: '12345'
     })
-    console.log(car)
     expect(cars).toEqual([car])
   })
 

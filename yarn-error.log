@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\jason\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add ts-config-paths -D
+  C:\Program Files\nodejs\node.exe C:\Users\jason\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add ts-node-dev
 
 PATH: 
   C:\Python310\Scripts\;C:\Python310\;C:\Program Files\Python38\Scripts\;C:\Program Files\Python38\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Common Files\Autodesk Shared\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Python36\Scripts\;C:\Python36\;C:\Users\jason\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\jason\AppData\Local\Programs\Python\Python39\;C:\Users\jason\AppData\Local\Microsoft\WindowsApps;C:\Users\jason\anaconda3\Library\bin\graphviz;C:\Program Files\nodejs;C:\Users\jason\AppData\Roaming\npm
@@ -14,17 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/ts-config-paths: Not found
-      at params.callback [as _callback] (C:\Users\jason\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66145:18)
-      at self.callback (C:\Users\jason\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140890:22)
-      at Request.emit (node:events:513:28)
-      at Request.<anonymous> (C:\Users\jason\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141862:10)
-      at Request.emit (node:events:513:28)
-      at IncomingMessage.<anonymous> (C:\Users\jason\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141784:12)
-      at Object.onceWrapper (node:events:627:28)
-      at IncomingMessage.emit (node:events:525:35)
-      at endReadableNT (node:internal/streams/readable:1359:12)
-      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+  Error: EPERM: operation not permitted, unlink 'C:\utiliários e programas\Rocketseat\RentALX\node_modules\.bin\ts-node-dev'
 
 npm manifest: 
   {
@@ -33,9 +23,10 @@ npm manifest:
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-      "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-      "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
-      "test": "jest"
+      "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
+      "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
+      "test": "jest",
+      "seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/admin.ts"
     },
     "dependencies": {
       "bcryptjs": "^2.4.3",
@@ -68,6 +59,7 @@ npm manifest:
       "eslint-plugin-prettier": "^4.2.1",
       "prettier": "^2.7.1",
       "ts-jest": "^29.0.3",
+      "tsconfig-paths": "^4.1.0",
       "typescript": "^4.8.4"
     }
   }
@@ -4535,6 +4527,15 @@ Lockfile:
     dependencies:
       "@types/json5" "^0.0.29"
       json5 "^1.0.1"
+      minimist "^1.2.6"
+      strip-bom "^3.0.0"
+  
+  tsconfig-paths@^4.1.0:
+    version "4.1.0"
+    resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-4.1.0.tgz#f8ef7d467f08ae3a695335bf1ece088c5538d2c1"
+    integrity sha512-AHx4Euop/dXFC+Vx589alFba8QItjF+8hf8LtmuiCwHyI4rHXQtOOENaM8kvYf5fR0dRChy3wzWIZ9WbB7FWow==
+    dependencies:
+      json5 "^2.2.1"
       minimist "^1.2.6"
       strip-bom "^3.0.0"
   
