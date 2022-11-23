@@ -64,5 +64,6 @@ class CarsRepositoryInMemory implements ICarRepository {
     const findIndex = this.cars.findIndex((car) => car.id === id)
     this.cars[findIndex].available = available
   }
+
 }
 export { CarsRepositoryInMemory }

@@ -1,11 +1,11 @@
 {
-  "openapi":"3.0.0.",
+  "openapi": "3.0.0",
   "info": {
-    "title": "RentALX Documentation",
+    "title": "RentX Documentation",
     "description": "This is an API Rent",
     "version": "1.0.0",
     "contact": {
-      "e-mail": "jasonems@gmail.com"
+      "email":"dani@rocketseat.com.br"
     }
   },
   "paths": {
@@ -13,38 +13,41 @@
       "post": {
         "tags": ["Category"],
         "summary": "Create a category",
-        "description": "Create a new category",
-        "requestBody":{
-          "content":{
-            "application/json":{
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                    "description": {
-                      "type": "string"
-                  }
-                },
-                "example": {
-                  "name":"category name sample",
-                  "description": "Category description sample"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Category already exists"
-          }
-        }
+         "description": "Create a new category",
+         "security": [
+          { "bearerAuth": []}
+         ],
+         "requestBody": {
+           "content": {
+             "application/json": {
+               "schema": {
+                 "type": "object",
+                 "properties": {
+                   "name": {
+                     "type": "string"
+                   },
+                   "description": {
+                     "type": "string"
+                   }
+                 },
+                 "example": {
+                   "name": "category name sample",
+                   "description": "Category description sample"
+                 }
+               }
+             }
+           }
+         },
+         "responses": {
+           "201": {
+             "description": "Created"
+           },
+           "500": {
+             "description": "Category already exists"
+           }
+         }
       },
-      "get":{
+      "get": {
         "tags": ["Category"],
         "summary": "List all categories",
         "description": "List all categories",
@@ -54,14 +57,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type":"array",
+                  "type": "array",
                   "items": {
-                    "type":"object",
+                    "type": "object",
                     "properties": {
                       "name": {
                         "type": "string"
                       },
-                      "description":{
+                      "description": {
                         "type": "string"
                       }
                     }
@@ -73,14 +76,17 @@
         }
       }
     },
-    "/categories/import" : {
+    "/categories/import": {
       "post": {
         "tags": ["Category"],
         "summary": "Upload a new category",
         "description": "Upload a new category",
-        "requestBody":{
-          "content":{
-            "multipart/form-data" : {
+        "security": [
+          { "bearerAuth": []}
+         ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -95,47 +101,189 @@
         },
         "responses": {
           "201": {
-            "description" : "Created"
+            "description": "Created"
           }
         }
       }
     },
-    "/specifications":{
-        "post": {
-          "tags": ["Specifications"],
-          "summary": "Create a specification",
-          "description": "Create a new specification",
-          "requestBody": {
-            "content": {
-              "application/json" : {
-                "schema": {
-                  "$ref": "#/definitions/Specification"
+    "/specifications": {
+      "post": {
+        "tags": ["Specifications"],
+        "summary": "Create a specification",
+        "description": "Create a new specification",
+        "security": [
+          { "bearerAuth": []}
+         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Specification"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Specification already exists!"
+          }
+        }
+      }
+    },
+    "/sessions": {
+      "post": {
+        "tags": ["Session"],
+        "summary": "Authentication user",
+        "description": "Authentication user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
                 }
               }
             }
+          }
+        },
+        "responses": {
+          "200": { 
+            "description": "Success"
           },
-          "responses": {
-            "201": {
-              "description": "Created"
-            },
-            "500": {
-              "description": "Specification already exists!"
-            }
+          "400": {
+            "description": "Email or password incorrect!"
           }
         }
       }
     },
+    "/cars": {
+      "post": {
+        "tags": ["Cars"],
+        "summary": "Create a new car",
+        "description": "Create a new car",
+        "security": [
+          { "bearerAuth": []}
+         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref":  "#/definitions/Car"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Car already exists!"
+          }
+        }
+      }
+    },
+    "/cars/images/{id}": {
+      "post": {
+        "tags": ["Cars"],
+        "summary": "Upload images",
+        "description": "Upload images",
+        "security": [
+          { "bearerAuth": []}
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { 
+            "description": "Created"
+          }
+        }
+      }
+    }
+  },
   "definitions": {
-    "Specification":{
+    "Specification": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string"
         },
-        "description":{
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Car": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "daily_rate": {
+          "type": "number"
+        },
+        "license_plate": {
+          "type": "string"
+        },
+        "fine_amount": {
+          "type": "number"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "category_id": {
           "type": "string"
         }
       }
     }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
   }
+  
 }
