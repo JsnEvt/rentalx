@@ -5,7 +5,6 @@ import { AppError } from '@shared/errors/AppError'
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository'
 import { IUsersTokensRepository } from '@modules/accounts/repositories/IUsersTokensRepository'
 import auth from '@config/auth'
-import { DayjsDateProvider } from '@shared/container/providers/DateProvider/Implementations/DayjsDateProvider'
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider'
 
 
